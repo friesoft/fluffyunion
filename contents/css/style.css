@@ -1,0 +1,49 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2025 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Main Stylesheet
+ */
+
+/* Common variable definitions and Fluffy Bunny palette */
+@import "variables.css";
+
+/* Default values for variables and common styles */
+@import "defaults.css";
+
+/* Push/Tool/Round/Switch button styles */
+@import "button.css";
+
+/* Tab bar and tab button styles */
+@import "tabs.css";
+
+/* Item/List/Grid/ComboBox/Menu delegate styles */
+@import "delegate.css";
+
+/* Text input and spinbox styles */
+@import "text.css";
+
+/* Checkbox and radio button styles */
+@import "check.css";
+
+/* Popup, dialog, menu, and tooltip styles */
+@import "popup.css";
+
+/* Application window, page, header, toolbar, footer, frame, and separator styles */
+@import "application.css";
+
+/* Scrollbar, slider, and progressbar styles */
+@import "bars.css";
+
+/* Kirigami specific element styles (cards, drawers, inline messages) */
+@import "kirigami.css";
+
+/* Table and header view styles */
+@import "tables.css";
+
+/* Calendar styles */
+@import "calendar.css";
+
+/* QtWidgets specific element styles */
+@import "widgets.css";

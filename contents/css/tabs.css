@@ -1,0 +1,305 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2026 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Tab Bars and Tab Buttons
+ */
+
+:root
+{
+    --tab-background-color: var(--fluffy-purple-dark);
+    --tab-text-color: var(--fluffy-pink-light);
+    --tab-open-background-color: var(--fluffy-purple-center);
+    --tab-open-text-color: var(--fluffy-cream);
+    --tab-disabled-text-color: var(--button-disabled-text-color);
+    --tab-disabled-background-color: var(--window-disabled-background-color);
+
+    --tab-highlight-size: 3px;
+    --tab-default-width: 100px;
+    --tab-default-height: 28px;
+
+    --tab-highlight-border: var(--tab-highlight-size) solid var(--fluffy-pink-bright);
+}
+
+tabbutton {
+    width: var(--tab-default-width);
+    height: var(--tab-default-height);
+    padding: var(--medium-spacing);
+    background-color: var(--tab-background-color);
+    color: var(--tab-text-color);
+
+    text-wrap-mode: no-wrap;
+
+    icon-alignment: content start center 0;
+    text-alignment: content center center 0;
+
+    &[direction="top"] {
+        border-bottom: 1px solid var(--fluffy-pink-deep);
+
+        &.first {
+            border-top-left-radius: var(--corner-radius);
+        }
+
+        &.last {
+            border-top-right-radius: var(--corner-radius);
+        }
+    }
+
+    &[direction="bottom"] {
+        border-top: 1px solid var(--fluffy-pink-deep);
+
+        &.first {
+            border-bottom-left-radius: var(--corner-radius);
+        }
+
+        &.last {
+            border-bottom-right-radius: var(--corner-radius);
+        }
+    }
+
+    &[direction="left"] {
+        width: var(--tab-default-height);
+        height: var(--tab-default-width);
+        border-left: 1px solid var(--fluffy-pink-deep);
+
+        &.first {
+            border-top-left-radius: var(--corner-radius);
+        }
+
+        &.last {
+            border-bottom-left-radius: var(--corner-radius);
+        }
+    }
+
+    &[direction="right"] {
+        width: var(--tab-default-height);
+        height: var(--tab-default-width);
+        border-right: 1px solid var(--fluffy-pink-deep);
+
+        &.first {
+            border-top-right-radius: var(--corner-radius);
+        }
+
+        &.last {
+            border-bottom-right-radius: var(--corner-radius);
+        }
+    }
+
+    &[display="icon-only"] {
+        icon-alignment: content center center 0;
+    }
+
+    &[direction="top"],
+    &[direction="bottom"] {
+        &[display="icon-only"] {
+            width: var(--icon-size-small);
+        }
+    }
+
+    &[direction="left"],
+    &[direction="right"] {
+        &[display="icon-only"] {
+            height: var(--icon-size-small);
+        }
+    }
+
+    &:disabled {
+        background-color: var(--tab-disabled-background-color);
+        color: var(--button-disabled-text-color);
+    }
+
+    &:hovered
+    {
+        background-color: mix(var(--fluffy-purple-center), var(--fluffy-hover-green), 0.35);
+        color: var(--window-text-color);
+    }
+
+    &:pressed
+    {
+        background-color: mix(var(--fluffy-purple-center), var(--fluffy-hover-green), 0.5);
+        color: var(--window-text-color);
+    }
+
+    &:checked,
+    &:highlighted
+    {
+        background-color: var(--tab-open-background-color);
+        background-image: url("../images/button-normal.svg");
+        color: var(--tab-open-text-color);
+        border: 1px solid var(--fluffy-pink-bright);
+
+        &[direction="top"] {
+            border-top-width: var(--tab-highlight-size);
+            border-top-color: var(--fluffy-pink-bright);
+            border-bottom-color: var(--tab-open-background-color);
+            border-top-left-radius: var(--corner-radius);
+            border-top-right-radius: var(--corner-radius);
+        }
+
+        &[direction="bottom"] {
+            border-bottom-width: var(--tab-highlight-size);
+            border-bottom-color: var(--fluffy-pink-bright);
+            border-top-color: var(--tab-open-background-color);
+            border-bottom-left-radius: var(--corner-radius);
+            border-bottom-right-radius: var(--corner-radius);
+        }
+
+        &[direction="left"] {
+            border-left-width: var(--tab-highlight-size);
+            border-left-color: var(--fluffy-pink-bright);
+            border-right-color: var(--tab-open-background-color);
+            border-top-left-radius: var(--corner-radius);
+            border-bottom-left-radius: var(--corner-radius);
+        }
+
+        &[direction="right"] {
+            border-right-width: var(--tab-highlight-size);
+            border-right-color: var(--fluffy-pink-bright);
+            border-left-color: var(--tab-open-background-color);
+            border-top-right-radius: var(--corner-radius);
+            border-bottom-right-radius: var(--corner-radius);
+        }
+    }
+
+    & > closebutton {
+        layout-alignment: content end center 0;
+        width: var(--icon-size-small);
+        height: var(--icon-size-small);
+        icon-name: "window-close-symbolic";
+
+        &:hovered,
+        &:pressed {
+            color: var(--highlight-text-color);
+            background-color: var(--negative-text);
+            border-radius: var(--icon-size-small);
+        }
+
+        &:disabled {
+            color: var(--button-disabled-text-color);
+            icon-color: var(--button-disabled-text-color);
+        }
+    }
+}
+
+tabbutton.immutable
+{
+    background-color: var(--fluffy-purple-dark);
+    border: none;
+    border-radius: 0px;
+    border-right: 1px solid var(--fluffy-pink-deep);
+    padding: var(--medium-spacing);
+    text-elide: none;
+    color: var(--window-text-color);
+
+    &:checked,
+    &:highlighted,
+    &.first,
+    &.last
+    {
+        border-radius: 0px;
+    }
+
+    &:checked
+    {
+        background-color: var(--fluffy-purple-center);
+        background-image: url("../images/button-normal.svg");
+        color: var(--fluffy-cream);
+    }
+
+    &[direction="top"]
+    {
+        border-bottom: 1px solid var(--fluffy-pink-deep);
+
+        &:checked
+        {
+            border-top: var(--tab-highlight-border);
+        }
+    }
+
+    &[direction="bottom"]
+    {
+        border-top: 1px solid var(--fluffy-pink-deep);
+
+        &:checked
+        {
+            border-bottom: var(--tab-highlight-border);
+        }
+    }
+
+    &[direction="left"]
+    {
+        border-right: 1px solid var(--fluffy-pink-deep);
+
+        &:checked
+        {
+            border-left: var(--tab-highlight-border);
+        }
+    }
+
+    &[direction="right"]
+    {
+        border-left: 1px solid var(--fluffy-pink-deep);
+
+        &:checked
+        {
+            border-right: var(--tab-highlight-border);
+        }
+    }
+}
+
+tabbar {
+    height: var(--tab-default-height);
+    width: var(--tab-default-width);
+    spacing: 0px;
+
+    &.immutable {
+        background-color: var(--fluffy-purple-dark);
+    }
+    &[direction="top"] {
+        border-bottom: 1px solid var(--window-border-color);
+    }
+    &[direction="bottom"] {
+        border-top: 1px solid var(--window-border-color);
+    }
+    &[direction="left"] {
+        border-right: 1px solid var(--window-border-color);
+    }
+    &[direction="right"] {
+        border-left: 1px solid var(--window-border-color);
+    }
+    &.kmultitabbar {
+        &[direction="top"],
+        &[direction="bottom"],
+        &[direction="left"],
+        &[direction="right"] {
+            border: none;
+        }
+        &[direction="left"] {
+            border-right: 1px solid var(--window-border-color);
+        }
+        &[direction="right"] {
+            border-left: 1px solid var(--window-border-color);
+        }
+    }
+}
+
+tabwidget {
+    padding: 12px;
+    border: none;
+    border-radius: var(--corner-radius);
+    background-color: transparent;
+    background-image: url("../images/fluffy-widget-background.svg");
+    &[direction="top"] {
+        inset-top: 1px;
+    }
+    &[direction="bottom"] {
+        inset-bottom: 1px;
+    }
+    &[direction="left"] {
+        inset-left: 1px;
+    }
+    &[direction="right"] {
+        inset-right: 1px;
+    }
+}

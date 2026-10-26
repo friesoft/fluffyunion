@@ -1,0 +1,236 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2025 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2025 Niccolò Venerandi <niccolo@venerandi.com>
+ * SPDX-FileCopyrightText: 2025 Akseli Lahtinen <akselmo@akselmo.dev>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Popups, Menus, Dialogs & Tooltips
+ * Uses original fluffy-background.svg, fluffy-tooltip.svg, and fluffy-panel-north.svg.
+ */
+
+:root
+{
+    --tooltip-text-color: var(--fluffy-cream);
+    --tooltip-background-color: var(--fluffy-purple-center);
+    --tooltip-border-color: var(--fluffy-pink-bright);
+
+    --popup-shadow-size: 20px;
+}
+
+menu, popup
+{
+    border-radius: var(--large-corner-radius);
+
+    background-color: transparent;
+    background-image: url("../images/fluffy-background.svg");
+    border: none;
+    color: var(--window-text-color);
+    padding: 18px 18px;
+    box-shadow: 0px 4px var(--popup-shadow-size) 0px rgba(0, 0, 0, 0.45);
+
+    &:disabled {
+        color: var(--window-disabled-text-color);
+        background-color: var(--window-disabled-background-color);
+        border: 1px solid var(--window-disabled-border-color);
+    }
+}
+
+overlay.modal
+{
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+menu
+{
+    padding: 18px 18px;
+    margin: var(--popup-shadow-size);
+}
+
+menuitem
+{
+    height: var(--large-element-size);
+    width: var(--menu-item-width);
+    padding: var(--medium-spacing);
+    spacing: var(--small-spacing);
+
+    border-radius: var(--corner-radius);
+
+    color: var(--window-text-color);
+
+    icon-alignment: content start center 0;
+    text-alignment: content start center 1;
+
+    &:hovered,
+    &.with-submenu:highlighted
+    {
+        background-color: var(--highlight-hover-color);
+        border: 1px solid var(--fluffy-hover-green);
+    }
+
+    &:pressed,
+    &.with-submenu:pressed
+    {
+        border: 1px solid var(--highlight-color);
+        background-color: var(--highlight-color);
+        color: var(--highlight-text-color);
+    }
+
+    &:disabled {
+        border: none;
+        background: none;
+        color: var(--window-disabled-text-color);
+    }
+
+    arrow {
+        width: var(--icon-size-small);
+        height: var(--icon-size-small);
+        layout-alignment: content end center 1;
+        icon-name: "arrow-right-symbolic";
+    }
+
+    indicator
+    {
+        width: var(--icon-size-small);
+        height: var(--icon-size-small);
+        layout-alignment: content start center -1;
+    }
+
+    shortcuttext {
+        spacing: 40px;
+        color: var(--fluffy-pink-light);
+        text-alignment: content end center 0;
+        &:disabled {
+            color: var(--window-disabled-text-color);
+        }
+    }
+}
+
+overlay {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+popup.combobox itemviewitem,
+popup.combobox menuitem {
+    padding: var(--large-spacing);
+    inset: var(--small-spacing);
+}
+
+menuseparator {
+    layout-alignment-horizontal: fill;
+    height: 1px;
+    background-color: var(--fluffy-pink-bright);
+    inset: var(--small-spacing);
+
+    &.with-title {
+        height: var(--large-element-size);
+        text-alignment: content start center 0;
+        layout-alignment-horizontal: end;
+        background-color: transparent;
+        padding: var(--small-spacing);
+        inset-left: -2px;
+        inset-right: -2px;
+        font-weight: bold;
+
+        color: var(--fluffy-pink-light);
+        border-bottom: 1px solid var(--fluffy-pink-bright);
+
+        &:disabled {
+            color: var(--window-disabled-text-color);
+        }
+    }
+}
+
+menubar
+{
+    background-color: var(--fluffy-purple-dark);
+    color: var(--window-text-color);
+    border: none;
+    .inactive & {
+        background-color: var(--header-background-inactive-color);
+        color: var(--header-disabled-text-color);
+    }
+}
+
+menubaritem
+{
+    width: var(--medium-element-size);
+    height: var(--medium-element-size);
+    padding: 2px 8px 2px 8px;
+
+    border-radius: var(--corner-radius);
+
+    color: var(--window-text-color);
+
+    text-alignment-horizontal: center;
+    text-alignment-vertical: center;
+
+    &:hovered,
+    &:highlighted
+    {
+        background-color: var(--highlight-hover-color);
+        background-image: url("../images/button-small-hover.svg");
+        border: 1px solid var(--fluffy-hover-green);
+    }
+    &:pressed
+    {
+        background-color: var(--highlight-color);
+        background-image: url("../images/iconbutton-pressed.svg");
+        color: var(--highlight-text-color);
+    }
+}
+
+dialog
+{
+    spacing: var(--small-spacing);
+    padding: 24px;
+    border-radius: var(--large-corner-radius);
+
+    text-alignment-horizontal: center;
+    icon-alignment-horizontal: center;
+
+    color: var(--window-text-color);
+    border: none;
+    background-color: var(--fluffy-purple-center);
+    background-image: url("../images/fluffy-background.svg");
+    box-shadow: var(--dialog-shadow);
+
+    .header {
+        font-size: 20px;
+        padding: var(--large-spacing);
+    }
+
+    listview {
+        &.panel-left,
+        &.panel-right {
+            border: none;
+            border-radius: 0px;
+            background-color: var(--view-background-color);
+        }
+
+        &.panel-left {
+            border-right: 1px solid var(--window-border-color);
+        }
+
+        &.panel-right {
+            border-left: 1px solid var(--window-border-color);
+        }
+    }
+}
+
+dialogbuttonbox
+{
+    spacing: var(--medium-spacing);
+    padding: var(--large-spacing);
+}
+
+tooltip
+{
+    color: var(--tooltip-text-color);
+    background-color: transparent;
+    background-image: url("../images/fluffy-tooltip.svg");
+    border: 18px solid transparent;
+    inset: -18px;
+    padding: 4px 8px;
+}
+

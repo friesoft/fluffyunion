@@ -1,0 +1,12 @@
+{
+    "input-type": "css",
+    "input-version": 1,
+    "name": "Fluffy Bunny (Union)",
+    "description": "The Fluffy Bunny theme for KDE Plasma, recreated as a Union style.",
+    "version": "0.3",
+    "license": "GPL-2.0-or-later",
+    "url": "https://kde.org",
+    "authors": [
+        "Bernhard Friedreich <friesoft@gmail.com>"
+    ]
+}

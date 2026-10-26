@@ -1,0 +1,137 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2025 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Global Variables & Palette
+ * Derived from original/desktoptheme/fluffybunny/colors and SVG artwork.
+ */
+
+:root {
+    /* Standard Sizes */
+    --minimal-spacing: 2px;
+    --small-spacing: 4px;
+    --medium-spacing: 6px;
+    --large-spacing: 8px;
+    --grid-unit: 18px;
+    --corner-radius: 6px;
+    --large-corner-radius: 10px;
+    --fluffy-frame-padding: 8px;
+    --fluffy-panel-padding: 6px;
+
+    /* Icon sizes */
+    --icon-size-small: 16px;
+    --icon-size-smallmedium: 22px;
+    --icon-size-medium: 32px;
+    --icon-size-large: 48px;
+
+    /* Default item sizes */
+    --small-element-size: 16px;
+    --medium-element-size: 24px;
+    --large-element-size: 32px;
+    --scrollbar-size: 26px;
+    --non-interactive-scrollbar-size: 10px;
+    --menu-item-width: 150px;
+    --text-field-width: 200px;
+
+    /* Core Fluffy Bunny Theme Colors (from original SVGs & colors file) */
+    --fluffy-pink-bright: rgb(255, 148, 235);
+    --fluffy-pink-light: rgb(255, 208, 246);
+    --fluffy-pink-white: rgb(255, 246, 253);
+    --fluffy-pink-deep: rgb(209, 96, 188);
+    --fluffy-purple-center: rgb(89, 67, 84);
+    --fluffy-purple-dark: rgb(58, 42, 54);
+    --fluffy-purple-light: rgb(114, 88, 108);
+
+    /* Original KColorScheme Accent & State Colors */
+    --fluffy-focus-orange: rgb(239, 132, 65);
+    --fluffy-hover-green: rgb(72, 177, 60);
+    --fluffy-bar-green-dark: rgb(30, 110, 47);
+    --fluffy-bar-green-light: rgb(50, 178, 53);
+    --fluffy-selection-blue: rgb(60, 131, 208);
+    --fluffy-selection-alt: rgb(56, 115, 176);
+    --fluffy-cream: rgb(255, 248, 209);
+    --fluffy-cream-alt: rgb(255, 235, 173);
+
+    /* Selection / Highlight Colors (Colors:Selection) */
+    --highlight-color: var(--fluffy-selection-blue);
+    --highlight-text-color: var(--fluffy-cream);
+    --highlight-hover-color: modify-color(var(--fluffy-hover-green) set-alpha 0.35);
+
+    /* Window Colors (Colors:Window & Fluffy Bunny SVG center) */
+    --window-text-color: rgb(255, 255, 255);
+    --window-background-color: var(--fluffy-purple-center);
+    --window-background-alternate-color: rgb(68, 50, 64);
+    --window-border-color: var(--fluffy-pink-deep);
+    --window-highlight-color: mix(var(--window-background-color), var(--highlight-color), 0.5);
+    --window-border-highlight-color: var(--fluffy-hover-green);
+
+    /* View Colors (Colors:View) */
+    --view-text-color: rgb(255, 255, 255);
+    --view-background-color: rgb(36, 26, 34);
+    --view-background-alternate-color: rgba(255, 160, 235, 0.08);
+    --view-border-color: var(--fluffy-pink-deep);
+    --view-highlight-color: mix(var(--view-background-color), var(--highlight-color), 0.5);
+
+    /* Header & WM Colors (Colors:WM & widgets/panel-background.svg) */
+    --header-text-color: rgb(255, 255, 255);
+    --header-background-color: var(--fluffy-purple-center);
+    --header-background-inactive-color: var(--fluffy-purple-dark);
+    --header-border-color: var(--fluffy-pink-bright);
+
+    --complementary-text-color: rgb(255, 255, 255);
+    --complementary-background-color: rgb(0, 0, 0);
+
+    /* Semantic Colors */
+    --positive-text: rgb(72, 177, 60);
+    --neutral-text: rgb(239, 132, 65);
+    --negative-text: rgb(255, 64, 64);
+    --positive-background: mix(var(--fluffy-purple-dark), var(--positive-text), 0.25);
+    --neutral-background: mix(var(--fluffy-purple-dark), var(--neutral-text), 0.25);
+    --negative-background: mix(var(--fluffy-purple-dark), var(--negative-text), 0.25);
+
+    --changed-foreground: var(--neutral-text);
+    --changed-background: var(--neutral-background);
+
+    /* Card Colors */
+    --card-background-color: var(--fluffy-purple-center);
+    --card-text-color: var(--window-text-color);
+    --card-border-color: var(--fluffy-pink-bright);
+    --card-hover-color: mix(var(--card-background-color), var(--fluffy-hover-green), 0.2);
+    --card-pressed-color: mix(var(--card-background-color), var(--highlight-color), 0.35);
+
+    /* Focus & Shadow */
+    --focus-outline-alpha: 0.75;
+    --focus-color: modify-color(var(--fluffy-focus-orange) set-alpha var(--focus-outline-alpha));
+    --shadow-color: rgba(0, 0, 0, 0.35);
+
+    /* Disabled Colors */
+    --window-disabled-text-color: rgb(152, 152, 152);
+    --window-disabled-background-color: rgb(45, 34, 42);
+    --window-disabled-border-color: rgb(120, 80, 110);
+
+    --view-disabled-text-color: rgb(136, 136, 136);
+    --view-disabled-background-color: rgb(25, 25, 25);
+    --view-disabled-border-color: rgb(85, 85, 85);
+
+    --header-disabled-text-color: rgb(152, 152, 152);
+    --header-disabled-background-color: rgb(45, 34, 42);
+    --header-disabled-border-color: rgb(120, 80, 110);
+
+    --complementary-disabled-text-color: rgb(136, 136, 136);
+
+    --highlight-disabled-color: mix(var(--window-disabled-background-color), var(--highlight-color), 0.2);
+    --highlight-disabled-text-color: rgb(177, 202, 232);
+
+    --card-disabled-background-color: var(--window-disabled-background-color);
+    --card-disabled-text-color: var(--window-disabled-text-color);
+    --card-disabled-border-color: var(--window-disabled-border-color);
+
+    /* Standard Elements */
+    --focus-outline: 2px solid var(--focus-color);
+    --dialog-shadow: 0px 2px 24px 0px rgba(0, 0, 0, 0.45);
+
+    --indicator-color: modify-color(var(--fluffy-pink-light) set-alpha 0.5);
+    --indicator-press-color: modify-color(var(--fluffy-hover-green) set-alpha 0.8);
+    --indicator-current-color: var(--fluffy-pink-bright);
+}

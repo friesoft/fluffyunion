@@ -1,0 +1,12 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2025 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Global Defaults
+ */
+
+* {
+    background: none;
+    icon-size: var(--icon-size-small);
+}

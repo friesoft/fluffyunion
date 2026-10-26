@@ -1,0 +1,443 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2025 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Buttons and Button-like Controls
+ * Uses original button-normal.svg, button-hover.svg, iconbutton-*.svg, and minibutton-*.svg.
+ */
+
+:root {
+    /* High-contrast Fluffy Bunny button palette over glossy dark-plum button SVGs */
+    --button-active-text-color: rgb(255, 255, 255);
+    --button-active-background-color: rgb(89, 67, 84);
+    --button-active-border-color: var(--fluffy-pink-deep);
+    --button-active-highlight-color: mix(var(--button-active-background-color), var(--fluffy-hover-green), 0.35);
+    --button-active-border-highlight-color: var(--fluffy-hover-green);
+    --button-active-checked-color: mix(var(--button-active-background-color), var(--fluffy-pink-bright), 0.35);
+    --button-active-focus-color: modify-color(var(--fluffy-focus-orange) set-alpha var(--focus-outline-alpha));
+
+    --button-active-header-border-color: var(--fluffy-pink-bright);
+    --button-active-header-highlight-color: mix(var(--header-background-color), var(--fluffy-hover-green), 0.35);
+    --button-active-header-checked-color: mix(var(--header-background-color), var(--fluffy-pink-bright), 0.3);
+
+    --button-inactive-text-color: rgb(215, 200, 212);
+    --button-inactive-background-color: rgb(68, 50, 64);
+    --button-inactive-border-color: rgb(140, 85, 125);
+    --button-inactive-highlight-color: mix(var(--button-inactive-background-color), var(--fluffy-hover-green), 0.35);
+    --button-inactive-checked-color: mix(var(--button-inactive-background-color), var(--fluffy-pink-bright), 0.25);
+
+    --button-disabled-text-color: rgb(145, 132, 142);
+    --button-disabled-background-color: rgb(52, 38, 48);
+    --button-disabled-border-color: rgb(105, 72, 96);
+    --button-disabled-highlight-color: mix(var(--button-disabled-background-color), var(--fluffy-hover-green), 0.2);
+
+    --button-border: 1px solid var(--button-active-border-color);
+    --button-border-highlight: 1px solid var(--button-active-border-highlight-color);
+    --button-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+    --button-focus: 2px solid var(--button-active-focus-color);
+
+    --button-default-size: 32px;
+    --button-padding: 8px;
+    --button-spacing: 4px;
+    --toolbutton-menu-padding: 2px;
+
+    --combobox-popup-background-color: var(--fluffy-purple-center);
+    --combobox-popup-highlight-color: mix(var(--combobox-popup-background-color), var(--fluffy-hover-green), 0.35);
+    --combobox-popup-text-color: var(--window-text-color);
+}
+
+button,
+toolbutton,
+combobox,
+roundbutton,
+delaybutton,
+toolbutton.raised
+{
+    width: var(--button-default-size);
+    height: var(--button-default-size);
+    spacing: var(--button-spacing);
+    padding: var(--button-padding);
+    border-radius: var(--corner-radius);
+
+    layout-alignment: content fill fill 0;
+    text-alignment-horizontal: center;
+    icon-alignment-horizontal: center;
+
+    color: var(--button-active-text-color);
+    border: var(--button-border);
+    background-color: var(--button-active-background-color);
+    background-image: url("../images/button-normal.svg");
+
+    &:checked
+    {
+        border: 1px solid var(--fluffy-pink-bright);
+        background-color: var(--button-active-checked-color);
+        background-image: url("../images/iconbutton-pressed.svg");
+    }
+
+    &:hovered
+    {
+        border-color: var(--button-active-border-highlight-color);
+        background-image: url("../images/button-hover.svg");
+    }
+
+    &:visual-focus
+    {
+        border-color: var(--fluffy-focus-orange);
+        outline: var(--button-focus);
+    }
+
+    &:disabled
+    {
+        color: var(--button-disabled-text-color);
+        background-color: var(--button-disabled-background-color);
+        border-color: var(--button-disabled-border-color);
+        box-shadow: none;
+    }
+
+    &.with-menu > indicator {
+        visibility: visible;
+        layout-alignment: content end center 0;
+        width: var(--icon-size-small);
+        height: var(--icon-size-small);
+        padding-left: var(--toolbutton-menu-padding);
+        padding-right: var(--toolbutton-menu-padding);
+        icon-name: "arrow-down";
+        icon-color: var(--button-active-text-color);
+    }
+
+    &.with-inline-arrow > indicator {
+        visibility: visible;
+        layout-alignment: content end end 0;
+        width: 8px;
+        height: 8px;
+        padding: 1px;
+        icon-name: "arrow-down";
+        icon-color: var(--button-active-text-color);
+    }
+
+    &.with-menu-button > indicator {
+        visibility: visible;
+        width: var(--icon-size-small);
+        height: var(--icon-size-small);
+        padding-left: var(--toolbutton-menu-padding);
+        padding-right: var(--toolbutton-menu-padding);
+        layout-alignment: content end fill 0;
+        icon-name: "arrow-down";
+        icon-color: var(--button-active-text-color);
+        border-left: var(--button-border);
+    }
+
+    &.menu-open {
+        border: var(--button-border-highlight);
+        & > indicator {
+            border: var(--button-border-highlight);
+            background-color: var(--button-active-highlight-color);
+            border-radius: var(--corner-radius);
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+    }
+
+    &[display="icon-only"].with-menu > indicator {
+        visibility: hidden;
+    }
+
+    &[display="text-under-icon"] {
+        text-alignment-vertical: stack-center;
+        icon-alignment-vertical: stack-center;
+    }
+}
+
+button,
+roundbutton,
+delaybutton
+{
+    box-shadow: var(--button-shadow);
+}
+
+button:pressed,
+toolbutton:pressed,
+combobox:pressed,
+roundbutton:pressed,
+delaybutton:pressed,
+toolbutton.raised:pressed
+{
+    border-color: var(--button-active-border-highlight-color);
+    background-color: var(--button-active-highlight-color);
+    background-image: url("../images/iconbutton-pressed.svg");
+    box-shadow: none;
+}
+
+button:checked,
+roundbutton:checked
+{
+    box-shadow: none;
+}
+
+toolbutton,
+button.flat,
+combobox.flat,
+roundbutton.flat
+{
+    border: none;
+    background: none;
+    box-shadow: none;
+    color: var(--window-text-color);
+
+    &:hovered {
+        border: var(--button-border-highlight);
+        background-color: var(--button-active-header-highlight-color);
+        background-image: url("../images/iconbutton-hover.svg");
+        color: var(--button-active-text-color);
+    }
+
+    &:visual-focus {
+        border: 1px solid var(--fluffy-focus-orange);
+    }
+
+    &:pressed {
+        border: var(--button-border-highlight);
+        background-color: var(--button-active-highlight-color);
+        background-image: url("../images/iconbutton-pressed.svg");
+        color: var(--button-active-text-color);
+    }
+
+    &:checked {
+        border: 1px solid var(--fluffy-pink-bright);
+        background-color: var(--button-active-header-checked-color);
+        background-image: url("../images/iconbutton-pressed.svg");
+        color: var(--button-active-text-color);
+    }
+
+    toolbar.header &:checked,
+    applicationheader &:checked
+    {
+        border-color: var(--button-active-header-border-color);
+        background-color: var(--button-active-header-checked-color);
+    }
+
+    toolbar.header &:pressed,
+    applicationheader &:pressed
+    {
+        background-color: var(--button-active-header-highlight-color);
+    }
+
+    &:disabled {
+        border: none;
+        background: none;
+    }
+
+    &.with-menu-button > indicator {
+        border-left: none;
+        &:hovered {
+            border-left: var(--button-border-highlight);
+        }
+    }
+
+    &.menu-open {
+        & > indicator {
+            border-left: var(--button-border-highlight);
+        }
+    }
+
+    &[colorset="window"],
+    [colorset="window"] &
+    {
+        color: var(--window-text-color);
+
+        &:disabled {
+            color: var(--window-disabled-text-color);
+        }
+    }
+
+    &[colorset="view"],
+    [colorset="view"] &
+    {
+        color: var(--view-text-color);
+
+        &:disabled {
+            color: var(--view-disabled-text-color);
+        }
+    }
+
+    &[colorset="complementary"],
+    [colorset="complementary"] &
+    {
+        color: var(--complementary-text-color);
+
+        &:disabled {
+            color: var(--complementary-disabled-text-color);
+        }
+    }
+
+    &[colorset="header"],
+    [colorset="header"] &
+    {
+        color: var(--header-text-color);
+
+        &:disabled {
+            color: var(--header-disabled-text-color);
+        }
+    }
+}
+
+toolbutton
+{
+    icon-size: 24px;
+    padding: 4px 6px 4px 6px;
+}
+
+toolbutton.raised
+{
+    icon-size: var(--icon-size-small);
+    padding: var(--button-padding);
+    background-image: url("../images/iconbutton-normal.svg");
+    color: var(--button-active-text-color);
+}
+
+roundbutton
+{
+    border-radius: var(--button-default-size);
+    background-image: url("../images/minibutton-normal.svg");
+
+    &:hovered {
+        background-image: url("../images/minibutton-hover.svg");
+    }
+
+    &:pressed,
+    &:checked {
+        background-image: url("../images/minibutton-pressed.svg");
+    }
+}
+
+combobox
+{
+    layout-alignment: content fill center 0;
+    text-alignment: content fill center 0;
+    icon-alignment: content start center 0;
+    box-shadow: var(--button-shadow);
+    text-wrap-mode: no-wrap;
+    text-elide: right;
+
+    & > indicator {
+        layout-alignment: content end center 0;
+        width: var(--icon-size-small);
+        height: var(--icon-size-small);
+        icon-name: "arrow-down-symbolic";
+        icon-color: var(--button-active-text-color);
+        visibility: visible;
+    }
+
+    &.editable,
+    &.flat.editable
+    {
+        background: var(--view-background-color);
+        color: var(--view-text-color);
+        border: 1px solid var(--view-border-color);
+        box-shadow: none;
+        text-elide: none;
+
+        &:hovered {
+            border-color: var(--button-active-border-highlight-color);
+        }
+
+        &:pressed {
+            border-color: var(--button-active-border-highlight-color);
+
+            & > indicator {
+                icon-color: var(--button-active-border-highlight-color);
+            }
+        }
+
+        &:visual-focus {
+            border-color: var(--fluffy-focus-orange);
+        }
+
+        &:disabled {
+            background-color: var(--view-disabled-background-color);
+            color: var(--view-disabled-text-color);
+            border-color: var(--view-disabled-border-color);
+        }
+    }
+}
+
+popup.combobox
+{
+    padding: 10px;
+    background-color: var(--combobox-popup-background-color);
+    background-image: url("../images/fluffy-background.svg");
+    border: 1px solid var(--fluffy-pink-bright);
+    border-radius: var(--large-corner-radius);
+
+    itemviewitem:highlight,
+    itemdelegate:highlight {
+        background-color: var(--combobox-popup-highlight-color);
+        border-color: var(--highlight-color);
+        color: var(--combobox-popup-text-color);
+    }
+}
+
+toolseparator {
+    background-color: var(--fluffy-pink-bright);
+
+    &.horizontal {
+        width: var(--large-element-size);
+        height: 1px;
+        inset: 4px 0px 4px 0px;
+    }
+
+    &.vertical {
+        width: 1px;
+        height: var(--large-element-size);
+        inset: 0px 4px 0px 4px;
+    }
+
+    toolbar.header &,
+    applicationheader &
+    {
+        background-color: var(--button-active-header-border-color);
+    }
+}
+
+delaybutton {
+    & > fill {
+        border-radius: var(--corner-radius);
+        border: var(--button-border-highlight);
+        background-color: var(--fluffy-hover-green);
+        background-image: url("../images/bar-meter-fill.svg");
+    }
+}
+
+tumbler {
+    width: 60px;
+    height: 200px;
+    background-color: var(--view-background-color);
+
+    text {
+        text-alignment-horizontal: center;
+        color: mix(var(--view-background-color), var(--view-text-color), 0.75);
+
+        &:highlighted {
+            color: var(--fluffy-cream);
+        }
+    }
+}
+
+button.changed,
+toolbutton.changed,
+combobox.changed,
+roundbutton.changed,
+delaybutton.changed {
+    background-color: var(--changed-background);
+    border: 1px solid var(--changed-foreground);
+}
+
+tabscrollbutton {
+    icon-alignment: content fill fill 0;
+    layout-alignment: content center center 0;
+    icon-size: 16px;
+    width: var(--button-default-size);
+    height: var(--button-default-size);
+}

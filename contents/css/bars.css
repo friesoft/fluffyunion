@@ -1,0 +1,326 @@
+/*
+ * SPDX-License-Identifier: BSD-2-Clause
+ * SPDX-FileCopyrightText: 2025 Arjen Hiemstra <ahiemstra@heimr.nl>
+ * SPDX-FileCopyrightText: 2025 Akseli Lahtinen <akselmo@akselmo.dev>
+ * SPDX-FileCopyrightText: 2026 Bernhard Friedreich <friesoft@gmail.com>
+ *
+ * Fluffy Bunny Union Style - Bars, progress bars, sliders, scrollbars, and dials
+ */
+
+:root {
+    --bar-active-background-color: var(--fluffy-purple-dark);
+    --bar-active-border-color: var(--fluffy-pink-deep);
+    --bar-track-active-background-color: var(--fluffy-bar-green-light);
+    --bar-track-active-border-color: var(--fluffy-hover-green);
+    --bar-handle-active-background-color: var(--button-active-background-color);
+    --bar-handle-active-border-color: var(--fluffy-pink-bright);
+
+    --bar-handle-active-highlight-color: var(--button-active-highlight-color);
+    --bar-handle-active-highlight-border-color: var(--button-active-border-highlight-color);
+
+    --bar-disabled-background-color: var(--window-disabled-background-color);
+    --bar-disabled-border-color: var(--window-disabled-border-color);
+    --bar-track-disabled-background-color: mix(var(--window-disabled-background-color), var(--window-background-color), 0.75);
+    --bar-track-disabled-border-color: var(--window-disabled-border-color);
+    --bar-handle-disabled-background-color: var(--button-disabled-background-color);
+    --bar-handle-disabled-border-color: var(--button-disabled-border-color);
+
+    --bar-handle-size: 20px;
+    --bar-tickmark-thickness: 2px;
+    --bar-tickmark-length: 8px;
+    --bar-tickmark-margin: 1px;
+
+    --dial-inactive-background-color: mix(var(--button-inactive-background-color), var(--window-background-color), 0.5);
+    --dial-inactive-border-color: var(--button-inactive-border-color);
+    --dial-active-background-color: mix(var(--button-active-background-color), var(--window-background-color), 0.5);
+    --dial-active-border-color: var(--button-active-border-color);
+    --dial-disabled-background-color: mix(var(--button-disabled-background-color), var(--window-background-color), 0.5);
+    --dial-disabled-border-color: var(--button-disabled-border-color);
+
+    --dial-handle-inactive-background-color: var(--button-inactive-background-color);
+    --dial-handle-inactive-border-color: var(--button-inactive-border-color);
+    --dial-handle-active-background-color: mix(var(--button-active-background-color), var(--highlight-color), 0.5);
+    --dial-handle-active-border-color: mix(var(--button-active-border-color), var(--highlight-color), 0.5);
+    --dial-handle-disabled-background-color: var(--button-disabled-background-color);
+    --dial-handle-disabled-border-color: var(--button-disabled-border-color);
+}
+
+busyindicator
+{
+    width: 36px;
+    height: 36px;
+    icon-name: "process-working-symbolic";
+}
+
+progressbar
+{
+    padding: 0px 8px 0px 8px;
+    inset: 0px;
+    text-alignment: content center center 0;
+    color: var(--fluffy-cream);
+
+    background-color: var(--bar-active-background-color);
+    background-image: url("../images/bar-meter-bg.svg");
+    border: 1px solid var(--bar-active-border-color);
+    border-radius: var(--corner-radius);
+
+    &.horizontal
+    {
+        width: 200px;
+        height: 18px;
+        background-image: url("../images/bar-meter-bg.svg");
+    }
+
+    &.vertical
+    {
+        width: 18px;
+        height: 200px;
+        background-image: url("../images/bar-meter-v-bg.svg");
+
+        & > track,
+        & > chunk {
+            background-image: url("../images/bar-meter-v-fill.svg");
+        }
+    }
+
+    & > track,
+    & > chunk {
+        background-color: var(--bar-track-active-background-color);
+        background-image: url("../images/bar-meter-fill.svg");
+        border: 1px solid var(--bar-track-active-border-color);
+        border-radius: var(--corner-radius);
+    }
+
+    & > chunk {
+        width: 32px;
+    }
+
+    &:disabled {
+        color: var(--window-disabled-text-color);
+        background-color: var(--bar-disabled-background-color);
+        border-color: var(--bar-disabled-border-color);
+
+        & > track,
+        & > chunk {
+            background-color: var(--bar-track-disabled-background-color);
+            border-color: var(--bar-track-disabled-border-color);
+        }
+    }
+}
+
+slider,
+rangeslider,
+dial
+{
+    background-color: var(--bar-active-background-color);
+    border: 1px solid var(--bar-active-border-color);
+    border-radius: var(--corner-radius);
+
+    & > fill {
+        background-color: var(--bar-track-active-background-color);
+        background-image: url("../images/bar-meter-fill.svg");
+        border: 1px solid var(--bar-track-active-border-color);
+        border-radius: var(--corner-radius);
+    }
+
+    & > handle {
+        width: var(--bar-handle-size);
+        height: var(--bar-handle-size);
+        background-color: var(--bar-handle-active-background-color);
+        background-image: url("../images/iconbutton-normal.svg");
+        border: 1px solid var(--bar-handle-active-border-color);
+        border-radius: 10px;
+        box-shadow: var(--button-shadow);
+
+        &:hovered
+        {
+            border-color: var(--bar-handle-active-highlight-border-color);
+            background-image: url("../images/iconbutton-hover.svg");
+        }
+
+        &:pressed
+        {
+            background-image: url("../images/iconbutton-pressed.svg");
+            box-shadow: none;
+        }
+    }
+
+    & > tickmark
+    {
+        background-color: var(--bar-active-border-color);
+
+        &.active {
+            background-color: var(--bar-track-active-border-color);
+        }
+    }
+
+    &.horizontal
+    {
+        width: 200px;
+        height: 6px;
+
+        & > tickmark {
+            width: var(--bar-tickmark-thickness);
+            height: var(--bar-tickmark-length);
+            margin-top: var(--bar-tickmark-margin);
+        }
+    }
+
+    &.vertical
+    {
+        width: 6px;
+        height: 200px;
+
+        & > tickmark {
+            width: var(--bar-tickmark-length);
+            height: var(--bar-tickmark-thickness);
+            margin-left: var(--bar-tickmark-margin);
+        }
+    }
+
+    &:disabled {
+        background-color: var(--bar-disabled-background-color);
+        border: 1px solid var(--bar-disabled-border-color);
+
+        & > fill {
+            background-color: var(--bar-track-disabled-background-color);
+            border-color: var(--bar-track-disabled-border-color);
+        }
+
+        & > handle {
+            background-color: var(--bar-handle-disabled-background-color);
+            border-color: var(--bar-handle-disabled-border-color);
+            box-shadow: none;
+        }
+
+        & > tickmark,
+        & > tickmark.active {
+            background-color: var(--bar-disabled-border-color);
+        }
+    }
+}
+
+slider:visual-focus > handle,
+rangeslider > handle:active-focus
+{
+    border-color: var(--bar-handle-active-highlight-border-color);
+    outline: var(--focus-outline);
+}
+
+slider:pressed > handle,
+rangeslider > handle:pressed
+{
+    background-color: var(--bar-handle-active-highlight-color);
+    background-image: url("../images/iconbutton-pressed.svg");
+    border-color: var(--bar-handle-active-highlight-border-color);
+}
+
+scrollbar
+{
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+
+    padding: 2px;
+
+    &.horizontal
+    {
+        border-top: none;
+        background-image: url("../images/fluffy-scrollbar-track-h.svg");
+        padding: 16px 2px 2px 2px;
+    }
+
+    &.vertical
+    {
+        border-left: none;
+        background-image: url("../images/fluffy-scrollbar-track-v.svg");
+        padding: 2px 2px 2px 16px;
+    }
+
+    & > handle {
+        background-color: var(--bar-active-background-color);
+        background-image: url("../images/button-small-normal.svg");
+        border: 1px solid var(--bar-active-border-color);
+        border-radius: var(--small-element-size);
+
+        &:hovered,
+        &:pressed
+        {
+            background-color: var(--bar-track-active-background-color);
+            background-image: url("../images/button-small-hover.svg");
+            border-color: var(--bar-track-active-border-color);
+        }
+
+        &:disabled {
+            background-color: var(--bar-disabled-background-color);
+            border: 1px solid var(--bar-disabled-border-color);
+        }
+    }
+
+    &.noninteractive {
+        width: var(--non-interactive-scrollbar-size);
+        border-left: none;
+        padding: var(--small-spacing);
+        & > handle {
+            background-color: var(--bar-handle-disabled-background-color);
+            border: 1px solid var(--bar-handle-disabled-border-color);
+        }
+    }
+}
+
+dial {
+    width: 128px;
+    height: 128px;
+    border-radius: 64px;
+    background-color: var(--dial-inactive-background-color);
+    background-image: url("../images/iconbutton-normal.svg");
+    border-color: var(--dial-inactive-border-color);
+
+    &:hovered {
+        background-color: var(--dial-active-background-color);
+        background-image: url("../images/iconbutton-hover.svg");
+        border-color: var(--dial-active-border-color);
+    }
+
+    &:pressed {
+        border-color: var(--highlight-color);
+        background-image: url("../images/iconbutton-pressed.svg");
+    }
+
+    &:disabled {
+        background-color: var(--dial-disabled-background-color);
+        border-color: var(--dial-disabled-border-color);
+    }
+
+    & > handle {
+        background-color: var(--dial-handle-inactive-background-color);
+        background-image: url("../images/minibutton-normal.svg");
+        border-color: var(--dial-handle-inactive-border-color);
+
+        &:hovered {
+            background-color: var(--dial-handle-active-background-color);
+            background-image: url("../images/minibutton-hover.svg");
+            border-color: var(--dial-handle-active-border-color);
+        }
+
+        &:pressed {
+            background-color: var(--highlight-color);
+            background-image: url("../images/minibutton-pressed.svg");
+            border-color: var(--highlight-color);
+        }
+
+        &:disabled {
+            background-color: var(--dial-handle-disabled-background-color);
+            border-color: var(--dial-handle-disabled-border-color);
+        }
+    }
+}
+
+slider.changed {
+    & > fill {
+        background-color: var(--changed-background);
+        border: 1px solid var(--changed-foreground);
+    }
+    & > tickmark.active {
+        background-color: var(--changed-foreground);
+    }
+}
